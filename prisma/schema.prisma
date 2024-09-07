@@ -17,14 +17,17 @@ model User {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  keys      Key[] // Relation field for multiple keys
+  keys      Key[]
 }
 
 model Key {
-  id        String   @id @default(cuid())
-  name      String
-  userId    String // Foreign key to reference the User model
-  user      User     @relation(fields: [userId], references: [id]) // Defining the relationship with User
-  value     String
-  createdAt DateTime @default(now())
+  id             String   @id @default(cuid())
+  name           String
+  userId         String // Foreign key to reference the User model
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade) // Defining the relationship with User
+  value          String
+  createdAt      DateTime @default(now())
+  numApiCall     Int      @default(0)
+  successApiCall Int      @default(0)
+  failApiCall    Int      @default(0)
 }
