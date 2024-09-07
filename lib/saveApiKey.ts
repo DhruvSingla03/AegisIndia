@@ -2,6 +2,7 @@
 "use server"
 import { prisma } from "@/app/db/prisma"
 import { generateApiKey } from "./generateApiKey"
+import { revalidatePath } from "next/cache"
 
 export async function saveApiKey(userId: string, name: string) {
   // Generate a new API key
@@ -30,6 +31,7 @@ export async function saveApiKey(userId: string, name: string) {
         value: apiKey, // Saving the generated API key in the 'value' field
       },
     })
+    revalidatePath("/dashboard")
 
     return newKey // Return the newly created key
   } catch (error) {

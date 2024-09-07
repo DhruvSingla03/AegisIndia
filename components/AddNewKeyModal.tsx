@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { saveApiKey } from "@/lib/saveApiKey"
-import { getUserId } from "@/lib/getUserdb"
+import { getUserId } from "@/lib/getUserId"
 
 interface AddNewKeyModalProps {
   email: string
@@ -45,7 +45,7 @@ export function AddNewKeyModal({ email }: AddNewKeyModalProps) {
   return (
     <>
       {/* Button to open the dialog */}
-      <Button onClick={() => setOpen(true)}>Add New</Button>
+      <Button variant="secondary" onClick={() => setOpen(true)}>Add New</Button>
 
       {/* Dialog component */}
       <Dialog open={open} onOpenChange={setOpen}>
