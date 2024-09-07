@@ -3,6 +3,7 @@
 import { prisma } from "@/app/db/prisma"
 import { generateApiKey } from "./generateApiKey"
 import { revalidatePath } from "next/cache"
+import crypto from "crypto" // Importing the crypto module
 
 export async function saveApiKey(userId: string, name: string) {
   // Generate a new API key
@@ -28,12 +29,29 @@ export async function saveApiKey(userId: string, name: string) {
       data: {
         name,
         userId,
-        value: apiKey, // Saving the generated API key in the 'value' field
+        value: apiKey, // Temporary value for now
       },
     })
+
+    // Hash the userId and newKey.id using SHA-256
+    const hash = crypto.createHash('sha256')
+      .update(userId + newKey.id) // Concatenating userId and newKey.id
+      .digest() // Get the result as a buffer
+
+    // Convert the first 16 bytes of the hash to a base64 string
+    const base64Hash = hash.slice(0, 16).toString('base64').substring(0, 32)
+
+    // Update the newly created key with the truncated and encoded value
+    const updatedKey = await prisma.key.update({
+      where: { id: newKey.id },
+      data: {
+        value: base64Hash, // Storing the base64 encoded value
+      },
+    })
+
     revalidatePath("/dashboard")
 
-    return newKey // Return the newly created key
+    return updatedKey // Return the updated key with the truncated and encoded value
   } catch (error) {
     console.error("Error saving API key:", error)
     throw new Error("Unable to save API key")
