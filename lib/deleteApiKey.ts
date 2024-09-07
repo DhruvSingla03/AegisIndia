@@ -6,7 +6,7 @@ import { revalidatePath } from "next/cache"
 export async function deleteApiKey(keyid:string){
     try {
         await prisma.key.delete({
-        where: { id: keyid },
+            where: { id: keyid },
         })
         revalidatePath("/dashboard")
         // Optionally, refresh keys after deletion or update state

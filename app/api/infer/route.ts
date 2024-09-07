@@ -32,8 +32,8 @@ export async function POST(request: NextRequest) {
     // Calculate the time difference in seconds
     const timeDifference = (currentTime.getTime() - new Date(lastApiCall).getTime()) / 1000
 
-    if (timeDifference < 12) {
-      // If less than 12 seconds have passed
+    if (timeDifference < 6) {
+      // If less than 6 seconds have passed
       await prisma.key.update({
         where: {
           value: apiKey,
@@ -103,7 +103,7 @@ export async function POST(request: NextRequest) {
                   increment:1
               }
             },
-          })
+        })
     }
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 })
   }
