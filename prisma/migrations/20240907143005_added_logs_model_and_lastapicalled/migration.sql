@@ -1,0 +1,14 @@
+-- AlterTable
+ALTER TABLE "Key" ADD COLUMN     "lastApiCall" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP;
+
+-- CreateTable
+CREATE TABLE "Log" (
+    "id" TEXT NOT NULL,
+    "keyId" TEXT NOT NULL,
+    "data" JSONB NOT NULL,
+
+    CONSTRAINT "Log_pkey" PRIMARY KEY ("id")
+);
+
+-- AddForeignKey
+ALTER TABLE "Log" ADD CONSTRAINT "Log_keyId_fkey" FOREIGN KEY ("keyId") REFERENCES "Key"("id") ON DELETE CASCADE ON UPDATE CASCADE;

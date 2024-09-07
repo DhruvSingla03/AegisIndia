@@ -25,9 +25,18 @@ model Key {
   name           String
   userId         String // Foreign key to reference the User model
   user           User     @relation(fields: [userId], references: [id], onDelete: Cascade) // Defining the relationship with User
-  value          String
+  value          String   @unique
   createdAt      DateTime @default(now())
   numApiCall     Int      @default(0)
   successApiCall Int      @default(0)
   failApiCall    Int      @default(0)
+  lastApiCall    DateTime @default(now())
+  logs           Log[]
+}
+
+model Log {
+  id    String @id @default(cuid())
+  keyId String
+  key   Key    @relation(fields: [keyId], references: [id], onDelete: Cascade) // Defining the relationship with Use
+  data  Json
 }
