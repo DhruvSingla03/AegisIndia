@@ -38,5 +38,8 @@ model Log {
   id    String @id @default(cuid())
   keyId String
   key   Key    @relation(fields: [keyId], references: [id], onDelete: Cascade) // Defining the relationship with Use
-  data  Json
+  requestData  Json
+  responseData  Json
+  success Boolean
+  createdAt DateTime @default(now())
 }
