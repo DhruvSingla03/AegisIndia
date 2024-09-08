@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
         const timeDifference = (currentTime.getTime() - new Date(lastApiCall).getTime()) / 1000
 
         // Check log count from cache
-        let logCount = logCountCache.get(keyRecord.id) || 0
+        const logCount = logCountCache.get(keyRecord.id) || 0
 
         if (logCount >= 50) {
             // Step 1: Find the oldest log if cache count >= 50
