@@ -1,13 +1,17 @@
+import { NavigationMenuDemo } from "@/components/Dropdown";
 import SignIn from "@/components/sign-in";
 
 export default async function Home() {
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center">
-      <div className="text-5xl font-bold mb-8">
-        AegisIndia
-      </div>
-      <div className="grid grid-rows pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-        <SignIn/>
+    <div>
+      <div className="flex flex-row text-3xl px-5 py-2 justify-between items-center font-bold">
+        <div className="flex gap-x-2 items-center">
+          AegisIndia
+          <div>
+            <NavigationMenuDemo/>
+          </div>
+        </div>
+        <SignIn />
       </div>
     </div>
   );

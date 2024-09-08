@@ -9,7 +9,7 @@ export function SignOut() {
         await signOut({redirectTo:"/"})
       }}
     >
-        <Button variant="secondary">Sign Out</Button>
+        <Button className="hover:bg-slate-100 hover:text-neutral-800 transition-colors duration-500 bg-neutral-800" variant="secondary">Sign Out</Button>
       
     </form>
   )

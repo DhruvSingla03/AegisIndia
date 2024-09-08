@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
     
     // Extract the request body
     const requestBody = await request.json(); // Extract the JSON body
-    console.log(requestBody)
+    // console.log(requestBody)
     // Extract request details: method, URL, headers, and body
     const requestData = {
         method: request.method,
@@ -99,15 +99,12 @@ export async function POST(request: NextRequest) {
         }
 
         // Make external POST request
-        const externalResponse = await fetch('https://reqres.in/api/users', {
+        const externalResponse = await fetch(process.env.INFER_URL as string, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                name: 'morpheus',
-                job: 'leader',
-            }),
+            body: JSON.stringify(requestBody),
         })
 
         const externalData = await externalResponse.json()
@@ -135,12 +132,16 @@ export async function POST(request: NextRequest) {
         // Increment log count in cache after new log
         logCountCache.set(keyRecord.id, logCount + 1)
 
-        return NextResponse.json({
-            message: "API call successful",
-            externalResponse: externalData,
-        })
+        return new NextResponse(
+          JSON.stringify(externalData),
+          {status: 200, headers: { 'ACCESS-CONTROL-ALLOW-ORIGIN': '*',
+            'ACCESS-CONTROL-ALLOW-METHODS': '*',
+            'ACCESS-CONTROL-ALLOW-CREDENTIALS': 'true',
+            'ACCESS-CONTROL-ALLOW-HEADERS': '*'} },
+          );
 
     } catch (error) {
-        return NextResponse.json({ error: "Internal Server Error" }, { status: 500 })
+      console.log(error)
+      return NextResponse.json({ error: "Internal Server Error" }, { status: 500 })
     }
 }
