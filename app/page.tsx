@@ -1,4 +1,5 @@
 import { NavigationMenuDemo } from "@/components/Dropdown";
+import { HeroHighlightDemo } from "@/components/HeroSection";
 import SignIn from "@/components/sign-in";
 
 export default async function Home() {
@@ -12,6 +13,9 @@ export default async function Home() {
           </div>
         </div>
         <SignIn />
+      </div>
+      <div >
+        <HeroHighlightDemo/>
       </div>
     </div>
   );
