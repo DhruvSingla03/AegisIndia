@@ -10,7 +10,7 @@ export default function SignIn() {
         await signIn("google",{redirectTo:"/dashboard"})
       }}
     >
-      <Button>Signin with Google</Button>
+      <Button className="hover:bg-slate-100 hover:text-neutral-800 transition-colors duration-500 bg-neutral-800">Sign In</Button>
     </form>
   )
 } 

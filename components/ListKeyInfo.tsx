@@ -27,18 +27,18 @@ const ListKeyInfo = ({ name, value }: ListKeyInfoProps) => {
         </div>
         <div>
             <Link href="/dashboard">
-                <Button className="hover:bg-slate-50 hover:text-neutral-800 bg-neutral-800">
+                <Button className="hover:bg-slate-50 duration-500 hover:text-neutral-800 bg-neutral-800">
                     Dashboard
                 </Button>
             </Link>
         </div>
       </div>
       <div className="ml-5 mr-5 bg-neutral-800 rounded-md flex justify-between items-center p-3 text-lg mt-5">
-        <div className="hover:bg-slate-50 hover:text-neutral-800 rounded-md p-2">
+        <div className="hover:bg-slate-50 hover:text-neutral-800 duration-500 rounded-md p-2">
           API Key
         </div>
         <div className="flex items-center space-x-4">
-          <div className={cn(isKeyVisible?"hover:bg-slate-50 hover:text-neutral-800 rounded-md p-2":"bg-inherit")}>
+          <div className={cn(isKeyVisible?"hover:bg-slate-50 duration-500 hover:text-neutral-800 rounded-md p-2":"bg-inherit")}>
             {isKeyVisible ? value : '•••••••••••••••'} {/* Conditionally render key value */}
           </div>
           <Button onClick={() => setIsKeyVisible(!isKeyVisible)} className="cursor-pointer" variant="secondary">
